@@ -24,19 +24,19 @@ from _config import FILE_FOLDERS_MESC, FILE_FOLDERS_U2OS
 # Functions
 ##
 def split(inp_fn, out_nm):
-  print inp_fn
+  #print inp_fn
   inp_fn_numlines = util.line_count(inp_fn)
 
-  print out_nm
+  #print out_nm
   
-  print inp_fn
+  #print inp_fn
   num_splits = 15
   split_size = int(inp_fn_numlines / num_splits)
   if num_splits * split_size < inp_fn_numlines:
     split_size += 1
   while split_size % 4 != 0:
     split_size += 1
-  print 'Using split size %s' % (split_size)
+  #print 'Using split size %s' % (split_size)
 
   split_num = 0
   for idx in range(1, inp_fn_numlines, split_size):
@@ -53,19 +53,19 @@ def split(inp_fn, out_nm):
 ##
 # Main
 ##
-@util.time_dec
+#@util.time_dec
 def main():
-  print NAME  
+  #print NAME  
   
   # Function calls
   for fn in os.listdir(inp_dir):
     if 'fastq' in fn:
-        print fn 
+        #print fn 
         files = ["190124Gif_D19-{0}_{1}_sequence.fastq".format(pool , read)
                  for pool in range(554,572)
                  for read in [1,2]]
 
-        print "files are"
+        #print "files are"
         if fn in files:
              split(os.path.join(inp_dir, fn), fn.replace('.fastq', ''))
       
