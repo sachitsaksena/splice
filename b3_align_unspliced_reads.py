@@ -13,7 +13,7 @@ import pandas as pd
 # Default params
 inp_dir = _config.OUT_PLACE + 'a_split/'
 NAME = util.get_fn(__file__)
-out_place = _config.OUT_PLACE + NAME + '/'
+out_place = _config.OUT_PLACE + NAME + '_510' + '/'
 util.ensure_dir_exists(out_place)
 exp_design = pd.read_csv(_config.DATA_DIR + '061318_exonskipping_library.csv')
 
@@ -397,7 +397,7 @@ def matchmaker(nm, split):
 def gen_qsubs():
   # Generate qsub shell scripts and commands for easy parallelization
   print 'Generating qsub scripts...'
-  qsubs_dir = _config.QSUBS_DIR + NAME + '/'
+  qsubs_dir = _config.QSUBS_DIR + NAME + '_510'+'/'
   util.ensure_dir_exists(qsubs_dir)
   qsub_commands = []
 
@@ -405,9 +405,9 @@ def gen_qsubs():
 
 #"190124Gif_D19-{0}_{1}_sequence.fastq
   
-  for _nm in ["190124Gif_D19-{0}".format(i) for i in range(554,557)+range(563,566)]:
+  for _nm in ["190510Gif_D19-2120{0}".format(i) for i in range(20,23)+range(29,32)]:
     for _split in range(15):
-      command = 'python %s.py %s %s' % (NAME, _nm, _split)
+      command = '/cluster/shz24/anaconda3/envs/splice_env/bin/python %s.py %s %s' % (NAME, _nm, _split)
       script_id = NAME.split('_')[0]
 
       # Write shell scripts

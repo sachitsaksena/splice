@@ -16,7 +16,7 @@ inp_dir = _config.OUT_PLACE + 'a_split/'
 NAME = util.get_fn(__file__)
 
 
-out_place = _config.OUT_PLACE + NAME + '/'
+out_place = _config.OUT_PLACE + NAME + '_510' + '/'
 util.ensure_dir_exists(out_place)
 exp_design = pd.read_csv(_config.DATA_DIR + '061318_exonskipping_library.csv')
 
@@ -226,7 +226,7 @@ def matchmaker(nm, split):
   #fq_unspliced_2 = open("/cluster/bh0085/prj/exons/data/{0}_2_sequence.fastq".format(nm))
 
   
-  stdout_fn = _config.SRC_DIR + 'b2_status_%s_%s.out' % (nm, split)
+  stdout_fn = _config.SRC_DIR + 'b6_status_%s_%s.out' % (nm, split)
   util.exists_empty_fn(stdout_fn)
   
   out_dir = out_place + nm + '/' + split + '/'
@@ -420,15 +420,15 @@ def matchmaker(nm, split):
 def gen_qsubs():
   # Generate qsub shell scripts and commands for easy parallelization
   print 'Generating qsub scripts...'
-  qsubs_dir = _config.QSUBS_DIR + NAME + '/'
+  qsubs_dir = _config.QSUBS_DIR + NAME + '_510'+'/'
   util.ensure_dir_exists(qsubs_dir)
   qsub_commands = []
 
   num_scripts = 0
 
-  for _nm in ["190124Gif_D19-{0}".format(i) for i in range(557,560)+range(566,569)]:
+  for _nm in ["190510Gif_D19-2120{0}".format(i) for i in range(23,26)+range(32,35)]:
     for _split in range(15):
-      command = 'python %s.py %s %s' % (NAME, _nm, _split)
+      command = '/cluster/shz24/anaconda3/envs/splice_env/bin/python %s.py %s %s' % (NAME, _nm, _split)
       script_id = NAME.split('_')[0]
 
       # Write shell scripts

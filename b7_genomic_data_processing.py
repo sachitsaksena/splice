@@ -16,7 +16,7 @@ inp_dir = _config.OUT_PLACE + 'a_split/'
 NAME = util.get_fn(__file__)
 
 
-out_place = _config.OUT_PLACE + NAME + '/'
+out_place = _config.OUT_PLACE + NAME+'_510' + '/'
 util.ensure_dir_exists(out_place)
 exp_design = pd.read_csv(_config.DATA_DIR + '061318_exonskipping_library.csv')
         
@@ -203,7 +203,7 @@ def matchmaker(nm, split):
   print nm, split
 
   umis_alignments_buffer = init_umis_alignments_buffer()
-  stdout_fn = _config.SRC_DIR + 'b2_status_%s_%s.out' % (nm, split)
+  stdout_fn = _config.SRC_DIR + 'b7_status_%s_%s.out' % (nm, split)
   util.exists_empty_fn(stdout_fn)
   out_dir = out_place + nm + '/' + split + '/'
   util.ensure_dir_exists(out_dir)
@@ -257,14 +257,14 @@ def matchmaker(nm, split):
             print "working"
             try:
                 print r1_prefix_constant
-                a1_offset = read1.upper().index(r1_prefix_constant)
+                a1_offset = read1.upper().index(r1_prefix_constant.upper())
             except Exception, e:
-                read_constant_rejection_count+=1
+                read1_rejection_count+=1
                 a1_offset = None
                 print "A1 EXCEPTION"
                 continue
             try:
-                a2_offset = read2.upper().index(r2_prefix_constant)
+                a2_offset = read2.upper().index(r2_prefix_constant.upper())
             except Exception, e:
                 a2_offset = None
                 read_constant_rejection_count+=1
@@ -318,7 +318,7 @@ def matchmaker(nm, split):
                outf.write('Time: %s\n' % (datetime.datetime.now()))
                outf.write('Progress: %s\n' % (i / int(tot_reads / 100)) )
                outf.write('Quality filtered pct: %s\n' % (qf / (i/4)))
-               outf.write("accepted {0}, rejected {1} bad read1\n\n{2} rc rejection".format(  accepted_count,read1_rejection_count,read_constant_rejection_count   ))
+               outf.write("accepted {0}, rejected {1} bad read1\n{2} rc rejection\n".format(accepted_count, read1_rejection_count, read_constant_rejection_count))
 
             timer.update()
            
@@ -355,15 +355,15 @@ def matchmaker(nm, split):
 def gen_qsubs():
   # Generate qsub shell scripts and commands for easy parallelization
   print 'Generating qsub scripts...'
-  qsubs_dir = _config.QSUBS_DIR + NAME + '/'
+  qsubs_dir = _config.QSUBS_DIR + NAME + '_510'+'/'
   util.ensure_dir_exists(qsubs_dir)
   qsub_commands = []
 
   num_scripts = 0
 
-  for _nm in  ["190124Gif_D19-{0}".format(i) for i in range(561,563)+range(570,572)]:
+  for _nm in  ["190510Gif_D19-2120{0}".format(i) for i in range(27,29)+range(36,38)]:
     for _split in range(15):
-      command = 'python %s.py %s %s' % (NAME, _nm, _split)
+      command = '/cluster/shz24/anaconda3/envs/splice_env/bin/python %s.py %s %s' % (NAME, _nm, _split)
       script_id = NAME.split('_')[0]
 
       # Write shell scripts

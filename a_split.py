@@ -13,12 +13,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Default params
-inp_dir = _config.READS_DIR
+inp_dir = _config.READS_DIR_510
 NAME = util.get_fn(__file__)
 out_dir = _config.OUT_PLACE + NAME + '/'
 util.ensure_dir_exists(out_dir)
 
-from _config import FILE_FOLDERS_MESC, FILE_FOLDERS_U2OS
+from _config import FILE_FOLDERS_MESC_510, FILE_FOLDERS_U2OS_510
 
 ##
 # Functions
@@ -61,8 +61,8 @@ def main():
   for fn in os.listdir(inp_dir):
     if 'fastq' in fn:
         #print fn 
-        files = ["190124Gif_D19-{0}_{1}_sequence.fastq".format(pool , read)
-                 for pool in range(554,572)
+        files = ["190510Gif_D19-2120{0}_{1}_sequence.fastq".format(pool , read)
+                 for pool in range(20,37)
                  for read in [1,2]]
 
         #print "files are"
