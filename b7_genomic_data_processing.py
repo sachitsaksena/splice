@@ -361,7 +361,7 @@ def gen_qsubs():
 
   num_scripts = 0
 
-  for _nm in  ["190510Gif_D19-2120{0}".format(i) for i in range(27,29)+range(36,38)]:
+  for _nm in  ["190510Gif_D19-2120{0}".format(i) for i in range(26,29)+range(35,38)]:
     for _split in range(15):
       command = '/cluster/shz24/anaconda3/envs/splice_env/bin/python %s.py %s %s' % (NAME, _nm, _split)
       script_id = NAME.split('_')[0]
